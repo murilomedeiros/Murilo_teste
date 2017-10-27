@@ -17,7 +17,7 @@
     <body id="pag" ng-controller="controllerDriver">
         <%@include file="WEB-INF/jspf/nav-bar.jspf" %>
         <div id="loader" class="loader"></div>
-        <h1 class="text-center whiteC quiz-title">Cadastro de Motoristas</h1><br>
+        <h1 class="text-center whiteC quiz-title top-title2">Cadastro de Motoristas</h1><br>
         <section class='container-user container-fluid content'>
             <h2 class="text-center">Formulário</h2><hr class='bottom-line3'><br><br>
 
