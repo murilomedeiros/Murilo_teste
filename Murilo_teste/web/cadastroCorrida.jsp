@@ -14,8 +14,6 @@
         <link rel='icon' href='resources/img/logo2.png'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link href="resources/css/custom.css" rel="stylesheet" type="text/css"/>
     </head>
     <body id="pag" ng-controller="controllerRun">
@@ -36,12 +34,17 @@
                             <div class="row">             
                                 <div class="form-group">
                                     <div class="col-md-6" > 
-                                        <label for="name">Nome do Motorista:<span>*</span></label>
-                                        <input ng-model="driverNameR" type="text" class="form-control" id="dName" placeholder="João Frederico Fernandes"  ng-required="true">
+                                        <label for="name">Selecione o Motorista:<span>*</span></label>
+                                        <img class="img-tooltip" data-toggle="tooltip" title="Lista dos motoristas que ativos no sistema" src="resources/img/tooltip.png" alt=""/>
+                                        <span class=" tooltip tooltiptext">Tooltip text</span>
+                                        <select ng-required="true" ng-model="driverIdR"  id="area-schedule"  class="form-control">
+                                            <option ng-repeat="driver in driverArray" value="{{driver.id}}">{{driver.name}}</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-6"> 
-                                        <label for="name">Nome do Passageiro:<span>*</span></label>
-                                        <input ng-model="clientNameR" type="text" class="form-control" id="cName" placeholder="Paula Frederico Fernandes"  ng-required="true">
+                                        <label for="name">CPF do Passageiro:<span>*</span></label>
+                                        <img class="img-tooltip" data-toggle="tooltip" title="Digite um passageiro já cadastrado" src="resources/img/tooltip.png" alt=""/>
+                                        <input ng-model="clientCpfR" type="text" class="form-control cpf" id="cName" placeholder=""  ng-required="true">
                                     </div>  
                                 </div>
                             </div><br><br>
@@ -49,14 +52,15 @@
                                 <div class="form-group">  
                                     <div class="col-md-6" > 
                                         <label for="date">Valor da Corrida:<span>*</span></label>
-                                        <input ng-model="priceR" type="text" class="form-control" id="price" placeholder=""  ng-required="true"> 
+                                        <img class="img-tooltip" data-toggle="tooltip" title="Digite o valor em Reais" src="resources/img/tooltip.png" alt=""/>
+                                        <input ng-model="priceR" type="number" class="form-control" id="price" placeholder=""  ng-required="true"> 
                                     </div>  
                                 </div>
                             </div><br><br><br>
                             <div class="row">             
                                 <div class="form-group">  
                                     <div class="col-md-3 col-md-offset-5">
-                                        <button  ng-disabled="runFrom.$invalid" type="button"class="btn btn-primary" ng-click="addRun(driverNameR, clientNameR, priceR)">Adicionar</button>
+                                        <button  ng-disabled="runFrom.$invalid" type="button"class="btn btn-primary" ng-click="addRun(driverIdR, clientCpfR, priceR)">Adicionar</button>
                                     </div> 
                                 </div>
                             </div><br>
@@ -67,6 +71,11 @@
 
         </section>
         <%@include file="WEB-INF/jspf/success-register.jspf" %>
+        <%@include file="WEB-INF/jspf/erro-modal.jspf" %>
         <%@include file="WEB-INF/jspf/footer.jspf" %>
+        <!-- Jquery Mask -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+        <!-- Custom Js -->
+        <script src="resources/js/custom.js" type="text/javascript"></script>
     </body>
 </html>

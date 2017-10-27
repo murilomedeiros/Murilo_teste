@@ -46,7 +46,7 @@
                                     </div>                                    
                                     <div class="col-md-4"> 
                                         <label for="cpf">CPF:<span>*</span></label>
-                                        <input ng-model="clientCPF" type="text" class="form-control" id="cpf" placeholder="567.364.214-78" name="cpf" ng-required="true">
+                                        <input ng-model="clientCPF" type="text" class="form-control cpf" id="cpf" placeholder="567.364.214-78" name="cpf" ng-required="true">
                                     </div>
                                     <div class="col-md-4" > 
                                         <label for="gender">Sexo:<span>*</span></label>
@@ -68,7 +68,12 @@
             </div>
         </section>
         <%@include file="WEB-INF/jspf/success-register.jspf" %>
+        <%@include file="WEB-INF/jspf/erro-modal.jspf" %>
         <%@include file="WEB-INF/jspf/footer.jspf" %>
+        <!-- Jquery Mask -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+        <!-- Custom Js -->
+        <script src="resources/js/custom.js" type="text/javascript"></script>
 
     </body>
 </html>

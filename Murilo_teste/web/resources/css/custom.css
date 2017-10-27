@@ -239,27 +239,13 @@ nav.navbar-transparent{
 
 /* --- Conteudo Team --*/
 
-#team{
-    height: 1130px; 
-    background: rgba(238, 162, 54, 0.5);
+#table-drivers{
+    min-height: 800px;
+    padding-bottom: 105px;
+    height: auto; 
+    background: rgba(252, 236, 214, 1);
     padding-top: 105px;
 
-}
-
-.member-team{
-    background-color: white;  
-    color: grey;  
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
-    margin-left: 80px;
-    border-radius: 3%
-}
-
-#team .member-team img{
-    margin-top: 10px;
-    width: 263px;
-    height: 220px;
-    border-radius: 10%;
-    font-family: Helvetica,Arial,sans-serif;
 }
 .bottom-line3{
     width:100px;
@@ -271,6 +257,11 @@ nav.navbar-transparent{
 }
 
 /* --- Content --*/
+
+.tables{
+    
+    padding-top: 100px;
+}
 
 
 .content{
@@ -318,45 +309,6 @@ nav.navbar-transparent{
     padding-right: 5%;
 }
 
-/* --- Quiz --- */
-
-.quiz-title{
-    margin-top: 180px;
-}
-
-.form-quiz{
-    margin: 10% 30% 15% 30%;
-    border-radius: 30px;
-    background-color: #EAF5F2;
-    padding: 30px 10px;
-    box-shadow: 2px 2px 2px 2px #888888;
-}
-
-#pagQuiz{
-    background-image: url('../img/backQuiz.png');
-    background-repeat: no-repeat;
-    background-size: 105%;
-}
-
-.form-quiz .radio-button{
-    margin: 15px 0px 15px 15%;
-}
-
-.form-quiz .radio-button2{
-    margin: 15px 0px 15px 15%;
-}
-.form-quiz .radio-place{
-    border-radius: 5px;
-    background-color: #d9d9d9;
-    margin: 10px 5px 30px 5px;
-}
-.form-quiz .row-radio{
-    margin: 10px 5px 30px 5px;
-}
-
-
-
-
 /* --- Página do Usuário --- */
 
 #pag{
@@ -400,13 +352,6 @@ nav.navbar-transparent{
 }
 #pagUser .left{
     float: left;
-}
-
-#pagUser .lion{
-    margin-top: 4px;
-    margin-left: 30px;
-    height: 150px;
-    z-index: 5;
 }
 /* --- Modal --- */
 #login-box-body {
@@ -452,7 +397,45 @@ nav.navbar-transparent{
     background-color: rgba(0, 0, 0, 0.15 );
 }
 
+/*------------------------ ToolTip ---------------------------------*/
 
+.img-tooltip{
+    height: 19px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
 
 /* ======================  Formatcao de texto  ======================*/
 

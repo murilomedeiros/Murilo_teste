@@ -29,19 +29,93 @@ pageModule.factory('postService', ['$http', function ($http) {
         };
     }]);
 
-pageModule.controller('controllerIndex', function ($scope) {
+pageModule.controller('controllerIndex', function ($scope, $rootScope, postService, $http, $timeout) {
+
+    $rootScope.getDrivers = function () {
+        $http.get("/Murilo_teste/data/driver.jsp?action=getDrivers")
+                .then((response) => {
+                    $scope.drivers = [];
+                    $scope.drivers = response.data.drivers;
+                    if ($scope.drivers == "") {
+                        $scope.selectError = response.data.re;
+                        $rootScope.viewD = true;
+                    } else {
+                        $scope.selectError = null;
+                        $rootScope.viewD = false;
+                    }
+                });
+    };
+
+    $rootScope.getClients = function () {
+        $http.get("/Murilo_teste/data/client.jsp?action=getClients")
+                .then((response) => {
+                    $scope.clients = [];
+                    $scope.clients = response.data.clients;
+                    if ($scope.clients == "") {
+                        $scope.selectError = response.data.re;
+                        $rootScope.viewC = true;
+                        
+                    } else {
+                        $scope.selectError = null;
+                        $rootScope.viewC = false;
+                    }
+                });
+    };
+
+    $scope.changeStatusDriver = function (status, sDriver) {
+        $rootScope.statusD = status;
+        $scope.BackUp = angular.copy(sDriver);
+        $rootScope.selectDriver = $scope.BackUp;
+        switch ($scope.statusD) {
+            case "true":
+                $rootScope.statusDName = "Ativo";
+                break;
+            case "false":
+                $rootScope.statusDName = "Inativo";
+                break;
+        }
+        if ($rootScope.statusDName != null) {
+            $("#confirmStatus").modal('show');
+        }
+    };
+
+    $rootScope.confirmedStatus = function (status, idDriver) {
+        var dados = {action: "changeStatus", status: status, idDriver: idDriver};
+        $("#loader").css("display", "block");
+        var url = "../Murilo_teste/data/driver.jsp";
+        postService.query(dados, url).then(function (re) {
+            $("#confirmStatus").modal('hide');
+            $("#loader").css("display", "none");
+            $("#success-change").modal('show');
+            $timeout(function () {
+                $("#success-change").modal('hide');
+            }, 2000);
+
+            $rootScope.getDrivers();
+        }).catch(function () {
+            $("#confirmStatus").modal('hide');
+            $("#loader").css("display", "none");
+            alert("Error");
+        });
+    };
+
+    $rootScope.getDrivers();
+    $rootScope.getClients();
 
 
 });
 
-pageModule.controller('controllerDriver', function ($scope, $rootScope, postService) {
-    $scope.addDriver = function (nameD, dateD, cpfD, carD, genderD, statusD) {
-        var dados = {action: "addDriver", nameD: nameD, dateD: dateD, cpfD: cpfD, carD: carD, genderD: genderD, statusD: statusD};
-        var url = "../Prototipo_teste/data/driver.jsp";
+pageModule.controller('controllerDriver', function ($scope, $rootScope, postService, $http) {
+    $scope.addDriver = function (nameD, dateD, cpfD, carD, genderD) {
+        $("#loader").css("display", "block");
+        var dados = {action: "addDriver", nameD: nameD, dateD: dateD, cpfD: cpfD, carD: carD, genderD: genderD};
+        var url = "../Murilo_teste/data/driver.jsp";
         postService.query(dados, url).then(function (re) {
+            $("#loader").css("display", "none");
             $('#success').modal('show');
         }).catch(function () {
-            alert("ERRO");
+            $("#loader").css("display", "none");
+            $('#erro-modal').modal('show');
         });
     };
 
@@ -53,20 +127,19 @@ pageModule.controller('controllerDriver', function ($scope, $rootScope, postServ
         $scope.driverGender = "";
     };
 
-    $scope.inscription = function (nameP, emailP, idEvent, nEvent) {
-        $("#loader").css("display", "block");
-    };
-
 });
 
 pageModule.controller('controllerClient', function ($scope, $rootScope, postService) {
     $scope.addClient = function (nameC, cpfC, dateC, genderC) {
+        $("#loader").css("display", "block");
         var dados = {action: "addClient", nameC: nameC, cpfC: cpfC, genderC: genderC, dateC: dateC};
-        var url = "../Prototipo_teste/data/client.jsp";
+        var url = "../Murilo_teste/data/client.jsp";
         postService.query(dados, url).then(function (re) {
+            $("#loader").css("display", "none");
             $('#success').modal('show');
         }).catch(function () {
-            alert("ERRO");
+            $("#loader").css("display", "none");
+            $('#erro-modal').modal('show');
         });
     };
 
@@ -80,17 +153,26 @@ pageModule.controller('controllerClient', function ($scope, $rootScope, postServ
 
 });
 
-pageModule.controller('controllerRun', function ($scope, $rootScope, postService) {
+pageModule.controller('controllerRun', function ($scope, $rootScope, postService, $http) {
 
-    $scope.addRun = function (driverNameR, clientNameR, priceR) {
-        var dados = {action: "addRun", driverNameR: driverNameR, clientNameR: clientNameR, priceR: priceR};
-        var url = "../Prototipo_teste/data/run.jsp";
-        postService.query(dados, url).then(function (re) {
+    $scope.addRun = function (driverIdR, clientCpfR, priceR) {
+        $("#loader").css("display", "block");
+        var dados = {action: "addRun", driverIdR: driverIdR, clientCpfR: clientCpfR, priceR: priceR};
+        var url = "../Murilo_teste/data/run.jsp";
+        postService.query(dados, url).then(function () {
+            $("#loader").css("display", "none");
             $('#success').modal('show');
         }).catch(function () {
-            alert("ERRO");
+            $("#loader").css("display", "none");
+            $('#erro-modal').modal('show');
         });
     };
+
+    $http.get("../Murilo_teste/data/run.jsp?action=selectDrivers")
+            .then(function (response) {
+                $scope.driverArray = [];
+                $scope.driverArray = response.data.driverArray;
+            });
 
     $scope.back = function () {
         $scope.driverNameR = "";

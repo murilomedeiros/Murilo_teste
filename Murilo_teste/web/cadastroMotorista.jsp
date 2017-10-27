@@ -12,8 +12,6 @@
         <link rel='icon' href='resources/img/logo2.png'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link href="resources/css/custom.css" rel="stylesheet" type="text/css"/>
     </head>
     <body id="pag" ng-controller="controllerDriver">
@@ -47,7 +45,7 @@
                                     </div>                                    
                                     <div class="col-md-6"> 
                                         <label for="cpf">CPF:<span>*</span></label>
-                                        <input ng-model="driverCPF"  type="text" class="form-control" id="cpfD" placeholder="567.364.214-78" name="cpf" ng-required="true">
+                                        <input ng-model="driverCPF"  type="text" class="form-control cpf" id="cpfD" placeholder="567.364.214-78" name="cpf" ng-required="true">
                                     </div>  
                                 </div>
                             </div><br><br>
@@ -65,19 +63,8 @@
                             </div><br><br>
                             <div class="row">             
                                 <div class="form-group">  
-                                    <div class="col-md-6"> 
-                                        <label for="gradu">Status:<span>*</span></label><br>
-                                        <div class="col-md-3"> 
-                                            <label><input ng-model="driverStatus" ng-value="ativo" name="status" type="radio" checked> Ativo</label><br>
-                                            <label><input ng-model="driverStatus" ng-value="inativo"  name="status" type="radio"> Inativo</label>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div><br><br>
-                            <div class="row">             
-                                <div class="form-group">  
                                     <div class="col-md-3 col-md-offset-5">
-                                        <button type="button" class="btn btn-primary" ng-click="addDriver(driverName, driverDate, driverCPF, driverCar, driverGender, driverStatus)" ng-disabled="driverFrom.$invalid">Adicionar</button>
+                                        <button type="button" class="btn btn-primary" ng-click="addDriver(driverName, driverDate, driverCPF, driverCar, driverGender)" ng-disabled="driverFrom.$invalid">Adicionar</button>
                                     </div> 
                                 </div>
                             </div><br>
@@ -85,10 +72,14 @@
                     </form>                    
                 </div>
             </div>
-
         </section>
         <%@include file="WEB-INF/jspf/success-register.jspf" %>
+        <%@include file="WEB-INF/jspf/erro-modal.jspf" %>
         <%@include file="WEB-INF/jspf/footer.jspf" %>
+        <!-- Jquery Mask -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+        <!-- Custom Js -->
+        <script src="resources/js/custom.js" type="text/javascript"></script>
 
     </body>
 </html>
